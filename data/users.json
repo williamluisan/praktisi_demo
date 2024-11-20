@@ -1,15 +1,21 @@
 [
     {
-        "id": "1",
+        "id": "xx11xx22",
         "name": "Alo One",
+        "age": 28,
         "occupation": "Wapres",
+        "address": "Somewhere between",
+        "status": "jomblo",
         "username": "alo",
         "password": "alo123"
     },
     {
-        "id": "2",
+        "id": "xx33xx44",
         "name": "Buce Two",
+        "age": 20,
         "occupation": "Wamenparekraf",
+        "address": "Hidden place that is known",
+        "status": "duda",
         "username": "buce",
         "password": "buce123"
     }

@@ -1,11 +1,11 @@
-from fastapi import FastAPI, HTTPException
-import json
+from fastapi import HTTPException, status
+from data.data import Data
 from modules.token import Token
+from starlette.responses import JSONResponse
 
 class Auth:
     def login(req):
-        with open('data/users.json', 'r') as file:
-            users = json.load(file)
+        users = Data.get_users_data()
 
         user_data = next((user for user in users if user['username'] == req.username and user['password'] == req.password), None)
 
@@ -13,7 +13,7 @@ class Auth:
             return Token.create_access_token(user_data)
         
         if not user_data:
-            raise HTTPException(status_code=401, detail="Wrong username or password")
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Wrong username or password")
         
     ###
     # def authenticate():

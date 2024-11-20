@@ -22,6 +22,11 @@ class Token:
                 'delete:pdf'    
             ]
         }
+        
         jwt_encoded = jwt.encode(payload, config["SECRET_KEY"], algorithm=config["ALGORITHM"])
         
-        return jwt_encoded
+        data = {
+            "access_token": jwt_encoded
+        }
+
+        return data
