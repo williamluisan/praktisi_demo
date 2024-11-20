@@ -1,2 +1,3 @@
 python_venv
 __pycache__/
+config/.env
