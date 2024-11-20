@@ -1,9 +1,15 @@
 [
     {
+        "id": "1",
+        "name": "Alo One",
+        "occupation": "Wapres",
         "username": "alo",
         "password": "alo123"
     },
     {
+        "id": "2",
+        "name": "Buce Two",
+        "occupation": "Wamenparekraf",
         "username": "buce",
         "password": "buce123"
     }
