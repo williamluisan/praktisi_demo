@@ -1,22 +1,57 @@
 [
     {
-        "id": "xx11xx22",
+        "id": "xx11xx11",
         "name": "Alo One",
         "age": 28,
         "occupation": "Wapres",
         "address": "Somewhere between",
+        "email": "alo@gmail.com",
         "status": "jomblo",
         "username": "alo",
         "password": "alo123"
     },
     {
-        "id": "xx33xx44",
+        "id": "xx22xx22",
         "name": "Buce Two",
         "age": 20,
         "occupation": "Wamenparekraf",
         "address": "Hidden place that is known",
+        "email": "buce@gmail.com",
         "status": "duda",
         "username": "buce",
         "password": "buce123"
+    },
+    {
+        "id": "xx33xx3",
+        "name": "Cepi Three",
+        "age": 18,
+        "occupation": "Caleg",
+        "address": "Green Hill",
+        "email": "cepi@gmail.com",
+        "status": "unknown",
+        "username": "cepi",
+        "password": "cepi123"
+    },
+    {
+        "id": "xx44xx44",
+        "name": "Deki Four",
+        "age": 35,
+        "occupation": "Mantan Hm",
+        "address": "Location unknown",
+        "email": "deki@gmail.com",
+        "status": "anak 2",
+        "username": "deki",
+        "password": "deki123"
+    },
+    {
+        "id": "xx55xx55",
+        "name": "Enal Five",
+        "age": 33,
+        "occupation": "Supporter Setia Indonesia",
+        "address": "Mahakeret",
+        "email": "enal@gmail.com",
+        "status": "wibu",
+        "username": "enal",
+        "password": "enal123"
     }
 ]

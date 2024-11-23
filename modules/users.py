@@ -11,8 +11,25 @@ class Users:
         user_data = next((user for user in users if user['id'] == user_id), None)
         return user_data
 
+    def list(limit: int = 3, page: int = 1):
+        page_list = page - 1
+        limit_list = page + limit - 1 # this because only using list
+        users = Data.get_users_data()
+        data = {
+            "page": page,
+            "limit": limit,
+            "data": users[page_list:limit_list]
+        }
+        return data
+
     def detail(request, user_id):
         token_payload = request.state.payload
+
+        if user_id is None:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="User id is not provided."
+            )
 
         users_cls = Users()
         user = users_cls.get_user_detail(user_id)

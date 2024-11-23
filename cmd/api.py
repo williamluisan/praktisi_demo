@@ -35,6 +35,10 @@ async def login(req: ReqLogin):
 # async def refresh_token():
     # return Auth.refresh_token(req)
 
+@app.get("/user/list")
+async def user_list(limit: int = 3, page: int = 1):
+    return Users.list(limit, page)
+
 @app.get("/user/detail/{user_id}")
 async def user_detail(user_id, token: Annotated[str, Depends(oauth2_scheme)]):
     return Users.detail_dummy(user_id, token)
