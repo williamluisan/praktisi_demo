@@ -71,3 +71,7 @@ class Users:
                 detail="User detail not found."
             )
         return user
+    
+    def detail_generate_pdf(user_id):
+        from cmd.api import rmq_chnl
+        print(rmq_chnl)

@@ -1,5 +1,6 @@
 import time
 import jwt
+import pika
 from jwt.exceptions import InvalidTokenError
 
 from fastapi import Depends, FastAPI, Request, HTTPException, status
@@ -15,8 +16,16 @@ from middleware.JWTMiddleware import JWTMiddleware
 from models.request.auth import Login as ReqLogin
 
 app = FastAPI()
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+dotenv_path = Path('./config/.env')
+config = dotenv_values(dotenv_path) 
+
+### connections
+rmq = pika.BlockingConnection(pika.ConnectionParameters(config["RABBIT_MQ_URL"], config["RABBIT_MQ_PORT"]))
+rmq_chnl = rmq.channel()
+### //
+
 
 ### endpoints
 @app.get("/")
@@ -45,6 +54,10 @@ async def user_detail(user_id, token: Annotated[str, Depends(oauth2_scheme)]):
 # @app.get("/user/detail/{user_id}")
 # async def user_detail(req: Request, user_id):
 #     return Users.detail(req, user_id)
+
+@app.post("/user/detail/{user_id}/generate_pdf")
+async def user_detail_generate_pdf(user_id):
+    return Users.detail_generate_pdf(user_id)
 
 # return 204 no content
 # @app.post("/user/update")
