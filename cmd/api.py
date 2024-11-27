@@ -14,6 +14,7 @@ from modules.users import Users
 from middleware.JWTMiddleware import JWTMiddleware
 
 from models.request.auth import Login as ReqLogin
+from models.request.auth import AuthRefreshToken as ReqAuthRefreshToken
 
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -22,8 +23,8 @@ dotenv_path = Path('./config/.env')
 config = dotenv_values(dotenv_path) 
 
 ### connections
-rmq = pika.BlockingConnection(pika.ConnectionParameters(config["RABBIT_MQ_URL"], config["RABBIT_MQ_PORT"]))
-rmq_chnl = rmq.channel()
+# rmq = pika.BlockingConnection(pika.ConnectionParameters(config["RABBIT_MQ_URL"], config["RABBIT_MQ_PORT"]))
+# rmq_chnl = rmq.channel()
 ### //
 
 
@@ -40,9 +41,9 @@ async def login(req: ReqLogin):
 # async def logout(req: ReqLogout):
     # return Auth.logout(req)
 
-# @app.post("/auth/refresh_token")
-# async def refresh_token():
-    # return Auth.refresh_token(req)
+@app.post("/auth/refresh_token")
+async def refresh_token(req: ReqAuthRefreshToken, request: Request):
+    return Auth.auth_refresh_token(req, request)
 
 @app.get("/user/list")
 async def user_list(limit: int = 3, page: int = 1):
