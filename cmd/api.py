@@ -22,14 +22,6 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 dotenv_path = Path('./config/.env')
 config = dotenv_values(dotenv_path) 
 
-### connections
-rmq = pika.BlockingConnection(pika.ConnectionParameters(config["RABBIT_MQ_URL"], config["RABBIT_MQ_PORT"]))
-rmq_chnl = rmq.channel()
-# this queue declare, is better to manually created within rabbitMQ
-rmq_chnl.queue_declare(queue="demo_pdf_generation")
-### //
-
-
 ### endpoints
 @app.get("/")
 def read_root():

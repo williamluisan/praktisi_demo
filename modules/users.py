@@ -5,6 +5,7 @@ from jwt.exceptions import InvalidTokenError
 from dotenv import dotenv_values
 from pathlib import Path
 from data.data import Data
+from modules.rmq import Rmq
 
 class Users:
     def get_user_detail(self, user_id):
@@ -74,7 +75,10 @@ class Users:
         return user
     
     def detail_generate_pdf(user_id):
-        from cmd.api import rmq_chnl
+        rmq_chnl = Rmq.connect_channel()
+
+        # this queue declare, is better to manually created within rabbitMQ
+        rmq_chnl.queue_declare(queue="demo_pdf_generation")
 
         try:
             rmq_chnl.basic_publish(
@@ -96,4 +100,7 @@ class Users:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"Broker: {e}"
             )
+        finally:
+            rmq_chnl.close()
+            
         
