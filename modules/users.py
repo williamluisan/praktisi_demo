@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status
+import pika
 import jwt
 from jwt.exceptions import InvalidTokenError
 from dotenv import dotenv_values
@@ -74,4 +75,25 @@ class Users:
     
     def detail_generate_pdf(user_id):
         from cmd.api import rmq_chnl
-        print(rmq_chnl)
+
+        try:
+            rmq_chnl.basic_publish(
+                exchange='',
+                routing_key='demo_pdf_generation',
+                body=f'{user_id}'
+            )
+            return HTTPException(
+                status_code=status.HTTP_200_OK,
+                detail="Your PDF will be generated soon and will be sent to your email"
+            )
+        except pika.exceptions.UnroutableError:
+            return HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Broker: message could not be routed."
+            )
+        except Exception as e:
+            return HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Broker: {e}"
+            )
+        

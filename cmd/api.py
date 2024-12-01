@@ -23,8 +23,10 @@ dotenv_path = Path('./config/.env')
 config = dotenv_values(dotenv_path) 
 
 ### connections
-# rmq = pika.BlockingConnection(pika.ConnectionParameters(config["RABBIT_MQ_URL"], config["RABBIT_MQ_PORT"]))
-# rmq_chnl = rmq.channel()
+rmq = pika.BlockingConnection(pika.ConnectionParameters(config["RABBIT_MQ_URL"], config["RABBIT_MQ_PORT"]))
+rmq_chnl = rmq.channel()
+# this queue declare, is better to manually created within rabbitMQ
+rmq_chnl.queue_declare(queue="demo_pdf_generation")
 ### //
 
 
