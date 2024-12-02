@@ -51,6 +51,8 @@ class Users:
     def detail_dummy(user_id, token):
         dotenv_path = Path('./config/.env')
         config = dotenv_values(dotenv_path) 
+
+        user_id_request = user_id
         
         credentials_exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -66,7 +68,7 @@ class Users:
             raise credentials_exception
         
         users_cls = Users()
-        user = users_cls.get_user_detail(user_id)
+        user = users_cls.get_user_detail(user_id_request)
         if user is None:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
